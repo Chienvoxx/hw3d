@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include "WindowsMessageMap.h"
 
 // https://docs.microsoft.com/en-us/windows/win32/learnwin32/writing-the-window-procedure
 // Our custom message callback procedure - set with wc.lpfnWndProc
@@ -120,6 +121,13 @@ int CALLBACK WinMain(
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	static WindowsMessageMap mm;
+	OutputDebugString( mm(msg, lParam, wParam).c_str() );
+
+
+	// Exactly 1000 messages listed here https://wiki.winehq.org/List_Of_Windows_Messages
+	// Says all standard messages that are used https://en.wikichip.org/wiki/List_of_Windows_Messages_-_Win32
+	// 
 	switch (msg)
 	{
 		case WM_CLOSE:
@@ -134,6 +142,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			break;
 	}
 	return DefWindowProc(hwnd, msg, wParam, lParam);
+
 }
 
 void OnSize(HWND hwnd, UINT flag, int width, int height)
