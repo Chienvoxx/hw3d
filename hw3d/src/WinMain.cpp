@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <sstream>
 #include "WindowsMessageMap.h"
 
 // https://docs.microsoft.com/en-us/windows/win32/learnwin32/writing-the-window-procedure
@@ -121,18 +122,59 @@ int CALLBACK WinMain(
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	static WindowsMessageMap mm;
-	OutputDebugString( mm(msg, lParam, wParam).c_str() );
+	//static WindowsMessageMap mm;
+	//OutputDebugString( mm(msg, lParam, wParam).c_str() );
 
 
 	// Exactly 1000 messages listed here https://wiki.winehq.org/List_Of_Windows_Messages
 	// Says all standard messages that are used https://en.wikichip.org/wiki/List_of_Windows_Messages_-_Win32
 	// 
+			static std::string title;
 	switch (msg)
 	{
 		case WM_CLOSE:
 			PostQuitMessage(69);
 			break;
+		case WM_KEYDOWN:
+			if (wParam == 'F')
+			{
+				//SetWindowText(hwnd, "F Pressed");
+				break;
+			}
+			break;
+		case WM_KEYUP:
+			if (wParam == 'F')
+			{
+				//SetWindowText(hwnd, "F Released");
+				break;
+			}
+			break;
+		case WM_CHAR:
+		{
+			if (wParam == VK_BACK)
+			{
+				if(title.size() > 0)
+					title.pop_back();
+			}
+			else
+			{
+				title.push_back((char)wParam);
+			}
+			SetWindowText(hwnd, title.c_str());
+			break;
+		}
+		case WM_LBUTTONDOWN:
+		{
+			//static int xPos;
+			//static int yPos;
+			//xPos = GET_X_LPARAM(lParam);
+			//yPos = GET_Y_LPARAM(lParam);
+			POINTS pt = MAKEPOINTS(lParam);
+			std::ostringstream oss;
+			oss << title << "   (" << pt.x << ", " << pt.y << ")";
+			SetWindowText(hwnd, oss.str().c_str());
+			break;
+		}
 		case WM_SIZE:
 			int width = LOWORD(lParam);  // Macro to get the low-order word.
 			int height = HIWORD(lParam); // Macro to get the high-order word.
