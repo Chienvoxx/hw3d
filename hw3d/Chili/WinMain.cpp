@@ -4,13 +4,13 @@
 
 // https://docs.microsoft.com/en-us/windows/win32/learnwin32/writing-the-window-procedure
 // Our custom message callback procedure - set with wc.lpfnWndProc
-LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LRESULT WINAPI WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 void OnSize(HWND hwnd, UINT flag, int width, int height);
 
 
 // https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain
-int CALLBACK WinMain(
+int WINAPI WinMain(
 	HINSTANCE	hInstance,		// A handle to the current instance of the application. Can ignore because there is a function to get when you want it.
 	HINSTANCE	hPrevInstance,	// Always null. A holdover from 16 bit windows
 	LPSTR		lpCmdLine,		// Command line data. Comes in as a single string
@@ -122,8 +122,8 @@ int CALLBACK WinMain(
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	//static WindowsMessageMap mm;
-	//OutputDebugString( mm(msg, lParam, wParam).c_str() );
+	static WindowsMessageMap mm;
+	OutputDebugString( mm(msg, lParam, wParam).c_str() );
 
 
 	// Exactly 1000 messages listed here https://wiki.winehq.org/List_Of_Windows_Messages
