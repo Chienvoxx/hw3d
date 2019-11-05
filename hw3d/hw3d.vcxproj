@@ -145,11 +145,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\WindowsMessageMap.cpp" />
-    <ClCompile Include="src\WinMain.cpp" />
+    <ClCompile Include="Chili\Window.cpp" />
+    <ClCompile Include="Chili\WindowsMessageMap.cpp" />
+    <ClCompile Include="Chili\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\WindowsMessageMap.h" />
+    <ClInclude Include="Chili\ChiliWin.h" />
+    <ClInclude Include="Chili\Window.h" />
+    <ClInclude Include="Chili\WindowsMessageMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
