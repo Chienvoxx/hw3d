@@ -17,51 +17,66 @@ int WINAPI WinMain(
 	int			nCmdShow)		// How the window should be presented on startup		https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
 {
 
-	Window wnd(800, 300, "Donky DX11 Box");
+	try
+	{
 
-	// 4-	Handle Messages
-	// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessage
-	/*	BOOL GetMessage(
-		  LPMSG lpMsg,			// pointer to tagMSG struct
-		  HWND  hWnd,			// NULL to get message to all windows on the thread
-		  UINT  wMsgFilterMin,
-		  UINT  wMsgFilterMax
-	);
-			If the function retrieves a message other than WM_QUIT, the return value is nonzero.
-			If the function retrieves the WM_QUIT message, the return value is zero.
-			If there is an error, the return value is -1. For example, the function fails if hWnd is an invalid window handle or lpMsg is an invalid pointer.
-			To get extended error information, call GetLastError.
-	*/
+		Window wnd(800, 300, "Donky DX11 Box");
 
-	// tagMSG structure
-	// https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msg
-	/*	typedef struct tagMSG {
-			HWND   hwnd;
-			UINT   message;
-			WPARAM wParam;
-			LPARAM lParam;
-			DWORD  time;
-			POINT  pt;
-			DWORD  lPrivate;
-		} MSG, *PMSG, *NPMSG, *LPMSG; */
+		// 4-	Handle Messages
+		// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessage
+		/*	BOOL GetMessage(
+			  LPMSG lpMsg,			// pointer to tagMSG struct
+			  HWND  hWnd,			// NULL to get message to all windows on the thread
+			  UINT  wMsgFilterMin,
+			  UINT  wMsgFilterMax
+		);
+				If the function retrieves a message other than WM_QUIT, the return value is nonzero.
+				If the function retrieves the WM_QUIT message, the return value is zero.
+				If there is an error, the return value is -1. For example, the function fails if hWnd is an invalid window handle or lpMsg is an invalid pointer.
+				To get extended error information, call GetLastError.
+		*/
+
+		// tagMSG structure
+		// https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-msg
+		/*	typedef struct tagMSG {
+				HWND   hwnd;
+				UINT   message;
+				WPARAM wParam;
+				LPARAM lParam;
+				DWORD  time;
+				POINT  pt;
+				DWORD  lPrivate;
+			} MSG, *PMSG, *NPMSG, *LPMSG; */
 	
-	MSG msg; // the tagMSG struct
-
-
-	BOOL gResult; // typedef int BOOL
-	while (gResult = GetMessage(&msg, nullptr, 0, 0) > 0)
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		MSG msg; // the tagMSG struct
+		BOOL gResult; // typedef int BOOL
+		while (gResult = GetMessage(&msg, nullptr, 0, 0) > 0)
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		if (gResult == -1)
+		{
+			return -1;
+		}
+		else
+		{
+			return msg.wParam;
+		}
 	}
-	if (gResult == -1)
+	catch (const ChiliException e)
 	{
-		return -1;
+		MessageBox(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);
 	}
-	else
+	catch (const std::exception e)
 	{
-		return msg.wParam;
+		MessageBox(nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONEXCLAMATION);
 	}
+	catch (...)
+	{
+		MessageBox(nullptr, "No details available", "Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
+	}
+	return -1;
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
