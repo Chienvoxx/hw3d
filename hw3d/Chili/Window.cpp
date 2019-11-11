@@ -55,7 +55,7 @@ HINSTANCE Window::WindowClass::GetInstance() noexcept
 
 
 //Window stuff
-Window::Window(int width, int height, const char* name) noexcept
+Window::Window(int width, int height, const char* name)
 {
 	// 2-	Create Window Instance
 	// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexa
@@ -65,7 +65,10 @@ Window::Window(int width, int height, const char* name) noexcept
 	wr.right = width + wr.left;
 	wr.top = 100;
 	wr.bottom = height + wr.top;
-	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
+	if (FAILED(AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE)))
+	{
+		throw CHWND_LAST_EXCEPT();
+	}
 	//create window and get hWind
 	hWnd = CreateWindow(
 		WindowClass::GetName(),
@@ -80,6 +83,11 @@ Window::Window(int width, int height, const char* name) noexcept
 		WindowClass::GetInstance(),
 		this
 	);
+	// check for error
+	if (hWnd == nullptr)
+	{
+		throw CHWND_LAST_EXCEPT();
+	}
 
 	// 3-	Show Window
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
@@ -209,17 +217,21 @@ const char* Window::Exception::GetType() const noexcept
 std::string Window::Exception::TranslateErrorCode(HRESULT hr) noexcept
 {
 	char* pMsgBuf = nullptr;
+	// windows will allocate memory for err string and make our pointer point to it
 	DWORD nMsgLen = FormatMessage(
 		FORMAT_MESSAGE_ALLOCATE_BUFFER |
 		FORMAT_MESSAGE_FROM_SYSTEM |
 		FORMAT_MESSAGE_IGNORE_INSERTS,
 		nullptr, hr, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
 		reinterpret_cast<LPSTR>(&pMsgBuf), 0, nullptr);
+	// 0 string length returned indicates a failure
 	if (nMsgLen == 0)
 	{
 		return "Unidentified error code";
 	}
+	// copy error string from windows-allocated buffer to std::string
 	std::string errorString = pMsgBuf;
+	// free windows buffer
 	LocalFree(pMsgBuf);
 	return errorString;
 }
