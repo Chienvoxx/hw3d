@@ -1,11 +1,25 @@
 #pragma once
-
 #include "ChiliWin.h"
+#include "ChiliException.h"
 
+// Error exception helper macro
+#define CHWND_EXCEPT(hr) Window::Exception(__line__, __file__, hr)
 
 class  Window
 {
 private:
+	class Exception : public ChiliException
+	{
+		Exception(int line, const char* file, HRESULT hr) noexcept;
+		const char* what() const noexcept override;
+		virtual const char* GetType() const noexcept;
+		static std::string TranslateErrorCode(HRESULT hr) noexcept;
+		HRESULT GetErrorCode() const noexcept;
+		std::string GetErrorString() const noexcept;
+	private:
+		HRESULT hr;
+	};
+
 	class WindowClass
 	{
 	public:
@@ -20,6 +34,7 @@ private:
 		static WindowClass wndClass;
 		HINSTANCE hInst;
 	};
+
 public:
 	 Window(int width, int height, const char* name) noexcept;
 	~ Window();

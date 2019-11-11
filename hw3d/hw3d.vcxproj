@@ -145,11 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chili\ChiliException.cpp" />
     <ClCompile Include="Chili\Window.cpp" />
     <ClCompile Include="Chili\WindowsMessageMap.cpp" />
     <ClCompile Include="Chili\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chili\ChiliException.h" />
     <ClInclude Include="Chili\ChiliWin.h" />
     <ClInclude Include="Chili\Window.h" />
     <ClInclude Include="Chili\WindowsMessageMap.h" />
