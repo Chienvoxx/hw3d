@@ -1,6 +1,7 @@
 #include "Window.h"
 #include <string>		//	temp include used to for Window text
 #include <sstream>		//  temp include used in HandleMsg
+#include "resource.h"
 
 
 // temp forward declaration
@@ -29,12 +30,18 @@ Window::WindowClass::WindowClass() noexcept
 	wc.cbClsExtra = 0;						// Allocate extra bytes to store custom data in the class
 	wc.cbWndExtra = 0;						// Allocate extra bytes to srore custom data in each instance of the window
 	wc.hInstance = GetInstance();			// A handle to the instance that contains the window procedure for the class.
-	wc.hIcon = nullptr;						
+	wc.hIcon = static_cast<HICON>(LoadImage(
+		GetInstance(), MAKEINTRESOURCE(IDI_ICON1),
+		IMAGE_ICON, 32, 32, 0
+	));
 	wc.hCursor = nullptr;
-	wc.hbrBackground = nullptr;				// A GDI brush. When this member is NULL, an application must paint its own background whenever it is requested to paint in its client area
-	wc.lpszMenuName = nullptr;				// If this member is NULL, windows belonging to this class have no default menu
-	wc.lpszClassName = GetName();			// If lpszClassName is a string, it specifies the window class name. The class name can be any name registered with RegisterClass or RegisterClassEx
-	wc.hIconSm = nullptr;					// A handle to a small icon that is associated with the window class.
+	wc.hbrBackground = nullptr;					// A GDI brush. When this member is NULL, an application must paint its own background whenever it is requested to paint in its client area
+	wc.lpszMenuName = nullptr;					// If this member is NULL, windows belonging to this class have no default menu
+	wc.lpszClassName = GetName();				// If lpszClassName is a string, it specifies the window class name. The class name can be any name registered with RegisterClass or RegisterClassEx
+	wc.hIconSm = static_cast<HICON>(LoadImage(
+		GetInstance(), MAKEINTRESOURCE(IDI_ICON1),
+		IMAGE_ICON, 16, 16, 0
+	));
 	RegisterClassEx(&wc);
 }
 
