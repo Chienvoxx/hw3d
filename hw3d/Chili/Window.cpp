@@ -115,11 +115,11 @@ LRESULT CALLBACK Window::HandleMessageSetup(HWND hWnd, UINT msg, WPARAM wParam, 
 		// data from CreateWindow(...) is contained in lpCreateParams, in particular the pointer this.
 		const CREATESTRUCTW* const pCreate = reinterpret_cast<CREATESTRUCTW*>(lParam);
 		Window* const pWnd = static_cast<Window*>(pCreate->lpCreateParams);
-		// set WinAPI-managed user data to store ptr to Window class
+		// set WinAPI-managed user data to store ptr to Window instance
 		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
 		// set message proc to normal non-setup handler now that setup is finished
 		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&Window::HandleMessageThunk));
-		// forward message to the Window class handler
+		// forward message to the Window instance handler
 		return pWnd->HandleMsg(hWnd, msg, wParam, lParam);
 	}
 	// if we get a message before WM_CREATE handle with the default handler

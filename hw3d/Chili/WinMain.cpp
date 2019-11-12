@@ -57,7 +57,8 @@ int WINAPI WinMain(
 		}
 		if (gResult == -1)
 		{
-			return -1;
+
+			throw CHWND_LAST_EXCEPT();
 		}
 		else
 		{
