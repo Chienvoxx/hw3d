@@ -147,33 +147,14 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 			PostQuitMessage(0);
 			return 0;
 		case WM_KEYDOWN:
-			if (wParam == 'F')
-			{
-				//SetWindowText(hwnd, "F Pressed");
-				break;
-			}
+			kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
 			break;
 		case WM_KEYUP:
-			if (wParam == 'F')
-			{
-				//SetWindowText(hwnd, "F Released");
-				break;
-			}
+			kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
 			break;
 		case WM_CHAR:
-		{
-			if (wParam == VK_BACK)
-			{
-				if (windowText.size() > 0)
-					windowText.pop_back();
-			}
-			else
-			{
-				windowText.push_back((char)wParam);
-			}
-			SetWindowText(hWnd, windowText.c_str());
+			kbd.OnChar(static_cast<unsigned char>(wParam));
 			break;
-		}
 		case WM_LBUTTONDOWN:
 		{
 			//static int xPos;

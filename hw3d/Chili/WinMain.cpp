@@ -20,7 +20,7 @@ int WINAPI WinMain(
 	try
 	{
 
-		Window wnd(800, 300, "Donky DX11 Box");
+		Window wnd(800, 300, "Donkey DX11 Box");
 
 		// 4-	Handle Messages
 		// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessage
@@ -54,7 +54,13 @@ int WINAPI WinMain(
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+			if (wnd.kbd.KeyIsPressed(VK_SPACE))
+			{
+				MessageBox(nullptr, "Something Happon!", "Space key was pressed", MB_OK | MB_ICONEXCLAMATION);
+			}
 		}
+
+
 		if (gResult == -1)
 		{
 

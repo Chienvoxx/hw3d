@@ -1,6 +1,7 @@
 #pragma once
 #include "ChiliWin.h"
 #include "ChiliException.h"
+#include "Keyboard.h"
 
 // Error exception helper macro
 #define CHWND_EXCEPT(hr) Window::Exception(__LINE__, __FILE__, hr)
@@ -43,6 +44,8 @@ public:
 	~ Window();
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
+public:
+	Keyboard kbd;
 private:
 	static LRESULT CALLBACK HandleMessageSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 	static LRESULT CALLBACK HandleMessageThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
