@@ -152,7 +152,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 
 		/******************* KEYBAORD MESSAGES *********************/
 		case WM_KEYDOWN:
-			if (!(lParam & 0x40000000) || kbd.AutorepeatIsEnabled())
+			if (!(lParam & 0x40000000) || kbd.AutorepeatIsEnabled()) // filter autorepeat
 			{
 				kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
 			}
@@ -162,6 +162,15 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 			break;
 		case WM_CHAR:
 			kbd.OnChar(static_cast<unsigned char>(wParam));
+			break;
+		case WM_SYSKEYDOWN:
+			if (!(lParam & 0x40000000) || kbd.AutorepeatIsEnabled()) // filter autorepeat
+			{
+				kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
+			}
+			break;
+		case WM_SYSKEYUP:
+			kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
 			break;
 		/******************* END KEYBAORD MESSAGES *****************/
 
