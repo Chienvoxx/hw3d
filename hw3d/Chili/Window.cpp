@@ -155,6 +155,9 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		case WM_CHAR:
 			kbd.OnChar(static_cast<unsigned char>(wParam));
 			break;
+		case WM_KILLFOCUS:
+			kbd.ClearState();
+			break;
 		case WM_LBUTTONDOWN:
 		{
 			//static int xPos;
