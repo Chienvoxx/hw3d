@@ -54,6 +54,10 @@ int WINAPI WinMain(
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+			if (wnd.kbd.KeyIsPressed(VK_MENU))
+			{
+				MessageBox(nullptr, "Something Happon!", "Alt key was pressed", MB_OK | MB_ICONEXCLAMATION);
+			}
 		}
 
 
