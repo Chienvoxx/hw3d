@@ -54,10 +54,6 @@ int WINAPI WinMain(
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
-			if (wnd.kbd.KeyIsPressed(VK_SPACE))
-			{
-				MessageBox(nullptr, "Something Happon!", "Space key was pressed", MB_OK | MB_ICONEXCLAMATION);
-			}
 		}
 
 
