@@ -52,6 +52,9 @@ HINSTANCE Window::WindowClass::GetInstance() noexcept
 
 //Window stuff
 Window::Window(int width, int height, const char* name)
+	:
+	width(width),
+	height(height)
 {
 	// 2-	Create Window Instance
 	// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-createwindowexa
