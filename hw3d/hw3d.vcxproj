@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="Chili\ChiliException.cpp" />
     <ClCompile Include="Chili\Keyboard.cpp" />
+    <ClCompile Include="Chili\Mouse.cpp" />
     <ClCompile Include="Chili\Window.cpp" />
     <ClCompile Include="Chili\WindowsMessageMap.cpp" />
     <ClCompile Include="Chili\WinMain.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Chili\ChiliException.h" />
     <ClInclude Include="Chili\ChiliWin.h" />
     <ClInclude Include="Chili\Keyboard.h" />
+    <ClInclude Include="Chili\Mouse.h" />
     <ClInclude Include="Chili\Window.h" />
     <ClInclude Include="Chili\WindowsMessageMap.h" />
     <ClInclude Include="resource.h" />

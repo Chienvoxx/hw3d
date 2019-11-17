@@ -2,6 +2,7 @@
 #include "ChiliWin.h"
 #include "ChiliException.h"
 #include "Keyboard.h"
+#include "Mouse.h"
 
 // Error exception helper macro
 #define CHWND_EXCEPT(hr) Window::Exception(__LINE__, __FILE__, hr)
@@ -46,6 +47,7 @@ public:
 	Window& operator=(const Window&) = delete;
 public:
 	Keyboard kbd;
+	Mouse mouse;
 private:
 	static LRESULT CALLBACK HandleMessageSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 	static LRESULT CALLBACK HandleMessageThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;

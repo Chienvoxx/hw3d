@@ -150,7 +150,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 			kbd.ClearState();
 			break;
 
-		/******************* KEYBAORD MESSAGES *********************/
+		/**************** KEYBAORD MESSAGES ******************/
 		case WM_KEYDOWN:
 			if (!(lParam & 0x40000000) || kbd.AutorepeatIsEnabled()) // filter autorepeat
 			{
@@ -172,21 +172,57 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		case WM_SYSKEYUP:
 			kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
 			break;
-		/******************* END KEYBAORD MESSAGES *****************/
+		/**************** END KEYBAORD MESSAGES *****************/
 
-
-		case WM_LBUTTONDOWN:
+		/******************* MOUSE MESSAGES *********************/
+		case WM_MOUSEMOVE:
 		{
 			//static int xPos;
 			//static int yPos;
 			//xPos = GET_X_LPARAM(lParam);
 			//yPos = GET_Y_LPARAM(lParam);
 			POINTS pt = MAKEPOINTS(lParam);
-			std::ostringstream oss;
-			oss << windowText << "   (" << pt.x << ", " << pt.y << ")";
-			SetWindowText(hWnd, oss.str().c_str());
+			mouse.OnMousMove(pt.x, pt.y);
 			break;
 		}
+		case WM_LBUTTONDOWN:
+		{
+			POINTS pt = MAKEPOINTS(lParam);
+			mouse.OnLeftPressed(pt.x, pt.y);
+			break;
+		}
+		case WM_LBUTTONUP:
+		{
+			POINTS pt = MAKEPOINTS(lParam);
+			mouse.OnLeftReleased(pt.x, pt.y);
+			break;
+		}
+		case WM_RBUTTONDOWN:
+		{
+			POINTS pt = MAKEPOINTS(lParam);
+			mouse.OnRightPressed(pt.x, pt.y);
+			break;
+		}
+		case WM_RBUTTONUP:
+		{
+			POINTS pt = MAKEPOINTS(lParam);
+			mouse.OnRightReleased(pt.x, pt.y);
+			break;
+		}
+		case WM_MOUSEWHEEL:
+		{
+			POINTS pt = MAKEPOINTS(lParam);
+			if (GET_WHEEL_DELTA_WPARAM(wParam) > 0)
+			{
+				mouse.OnWheelUp(pt.x, pt.y);
+			}
+			else if (GET_WHEEL_DELTA_WPARAM(wParam) < 0)
+			{
+				mouse.OnWheelDown(pt.x, pt.y);
+			}
+		}
+
+		/****************** END MOUSE MESSAGES *******************/
 		case WM_SIZE:
 			int width = LOWORD(lParam);  // Macro to get the low-order word.
 			int height = HIWORD(lParam); // Macro to get the high-order word.
