@@ -5,6 +5,7 @@
 class Mouse
 {
 	friend class Window;
+public:
 	class Event
 	{
 	public:

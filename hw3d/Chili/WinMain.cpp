@@ -54,6 +54,17 @@ int WINAPI WinMain(
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
+
+			while (!wnd.mouse.IsEmpty())
+			{
+				const auto e = wnd.mouse.Read();
+				if (e.GetType() == Mouse::Event::Type::Move)
+				{
+					std::ostringstream oss;
+					oss << "Mouse position: (" << e.GetPosX() << ", " << e.GetPosY() << ")";
+					wnd.SetTitle(oss.str());
+				}
+			}
 		}
 
 
