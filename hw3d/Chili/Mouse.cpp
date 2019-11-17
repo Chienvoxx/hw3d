@@ -1,4 +1,5 @@
 #include "Mouse.h"
+#include <Windows.h>
 
 
 
@@ -107,6 +108,22 @@ void Mouse::TrimBuffer() noexcept
 	while (buffer.size() > bufferSize)
 	{
 		buffer.pop();
+	}
+}
+
+void Mouse::OneWheelDelta(int x, int y, int delta) noexcept
+{
+	wheelDeltaCarry += delta;
+	// generate events for every 120 
+	while (wheelDeltaCarry >= WHEEL_DELTA)
+	{
+		wheelDeltaCarry -= WHEEL_DELTA;
+		OnWheelUp(x, y);
+	}
+	while (wheelDeltaCarry <= -WHEEL_DELTA)
+	{
+		wheelDeltaCarry += WHEEL_DELTA;
+		OnWheelDown(x, y);
 	}
 }
 

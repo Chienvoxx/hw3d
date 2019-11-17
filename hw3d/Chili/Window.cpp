@@ -253,6 +253,8 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 			{
 				mouse.OnWheelDown(pt.x, pt.y);
 			}
+			const int delta = GET_WHEEL_DELTA_WPARAM(wParam);
+			mouse.OneWheelDelta(pt.x, pt.y, delta);
 			break;
 		}
 

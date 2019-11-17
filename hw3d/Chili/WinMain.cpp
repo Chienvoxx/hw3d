@@ -1,6 +1,4 @@
 #include "Window.h"
-#include <sstream>
-
 
 
 int WINAPI WinMain(
