@@ -1,19 +1,7 @@
 #include "Window.h"
-#include <string>		//	temp include used to for Window text
-#include <sstream>		//  temp include used in HandleMsg
-#include "resource.h"
+#include <sstream>
+#include "resource.h" // ICONS and such
 
-
-// temp forward declaration
-void OnSize(HWND hwnd, UINT flag, int width, int height);
-
-
-	/*	1-	Register Window Class
-		2-	Create Window Instance
-		3-	Show Window
-		4-	Handle Messages
-				See while loop in WinMain.cpp
-	*/
 
 // WindowClass stuff
 Window::WindowClass Window::WindowClass::wndClass;
@@ -24,21 +12,21 @@ Window::WindowClass::WindowClass() noexcept
 	const auto pClassName = "dx11Window";
 	// 1-	Register Window Class
 	// https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexa
-	WNDCLASSEXA wc = { 0 };					// Struct to pass to Window class, zeroed out for initialization
+	WNDCLASSEXA wc = { 0 };
 	wc.cbSize = sizeof(wc);
-	wc.style = CS_OWNDC;					// Gives each window its own device context so it can be rendered to independently
-	wc.lpfnWndProc = HandleMessageSetup;	// Pointer to function that handles all the messages for the window. Initially set to default windows procedure. Later we'll create our own.
-	wc.cbClsExtra = 0;						// Allocate extra bytes to store custom data in the class
-	wc.cbWndExtra = 0;						// Allocate extra bytes to srore custom data in each instance of the window
-	wc.hInstance = GetInstance();			// A handle to the instance that contains the window procedure for the class.
+	wc.style = CS_OWNDC;
+	wc.lpfnWndProc = HandleMessageSetup;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hInstance = GetInstance();
 	wc.hIcon = static_cast<HICON>(LoadImage(
 		GetInstance(), MAKEINTRESOURCE(IDI_ICON2),
 		IMAGE_ICON, 32, 32, 0
 	));
 	wc.hCursor = nullptr;
-	wc.hbrBackground = nullptr;					// A GDI brush. When this member is NULL, an application must paint its own background whenever it is requested to paint in its client area
-	wc.lpszMenuName = nullptr;					// If this member is NULL, windows belonging to this class have no default menu
-	wc.lpszClassName = GetName();				// If lpszClassName is a string, it specifies the window class name. The class name can be any name registered with RegisterClass or RegisterClassEx
+	wc.hbrBackground = nullptr;
+	wc.lpszMenuName = nullptr;
+	wc.lpszClassName = GetName();
 	wc.hIconSm = static_cast<HICON>(LoadImage(
 		GetInstance(), MAKEINTRESOURCE(IDI_ICON2),
 		IMAGE_ICON, 16, 16, 0
@@ -189,37 +177,37 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 			//static int yPos;
 			//xPos = GET_X_LPARAM(lParam);
 			//yPos = GET_Y_LPARAM(lParam);
-			POINTS pt = MAKEPOINTS(lParam);
+			const POINTS pt = MAKEPOINTS(lParam);
 			mouse.OnMousMove(pt.x, pt.y);
 			break;
 		}
 		case WM_LBUTTONDOWN:
 		{
-			POINTS pt = MAKEPOINTS(lParam);
+			const POINTS pt = MAKEPOINTS(lParam);
 			mouse.OnLeftPressed(pt.x, pt.y);
 			break;
 		}
 		case WM_LBUTTONUP:
 		{
-			POINTS pt = MAKEPOINTS(lParam);
+			const POINTS pt = MAKEPOINTS(lParam);
 			mouse.OnLeftReleased(pt.x, pt.y);
 			break;
 		}
 		case WM_RBUTTONDOWN:
 		{
-			POINTS pt = MAKEPOINTS(lParam);
+			const POINTS pt = MAKEPOINTS(lParam);
 			mouse.OnRightPressed(pt.x, pt.y);
 			break;
 		}
 		case WM_RBUTTONUP:
 		{
-			POINTS pt = MAKEPOINTS(lParam);
+			const POINTS pt = MAKEPOINTS(lParam);
 			mouse.OnRightReleased(pt.x, pt.y);
 			break;
 		}
 		case WM_MOUSEWHEEL:
 		{
-			POINTS pt = MAKEPOINTS(lParam);
+			const POINTS pt = MAKEPOINTS(lParam);
 			if (GET_WHEEL_DELTA_WPARAM(wParam) > 0)
 			{
 				mouse.OnWheelUp(pt.x, pt.y);
@@ -228,16 +216,10 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 			{
 				mouse.OnWheelDown(pt.x, pt.y);
 			}
+			break;
 		}
 
 		/****************** END MOUSE MESSAGES *******************/
-		case WM_SIZE:
-			int width = LOWORD(lParam);  // Macro to get the low-order word.
-			int height = HIWORD(lParam); // Macro to get the high-order word.
-
-			// Respond to the message:
-			OnSize(hWnd, (UINT)wParam, width, height);
-			break;
 	}
 
 	return DefWindowProc(hWnd, msg, wParam, lParam);
