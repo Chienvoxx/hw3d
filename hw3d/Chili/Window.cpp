@@ -181,7 +181,29 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 			//xPos = GET_X_LPARAM(lParam);
 			//yPos = GET_Y_LPARAM(lParam);
 			const POINTS pt = MAKEPOINTS(lParam);
-			mouse.OnMousMove(pt.x, pt.y);
+			if (pt.x >= 0 && pt.x < width && pt.y >= 0 && pt.y < height)
+			{
+				mouse.OnMousMove(pt.x, pt.y);
+				if (!mouse.IsInWindow())
+				{
+					SetCapture(hWnd);
+					mouse.OnMouseEnter();
+				}
+			}
+			// not in client -> Log move / maintain capture if button down
+			else
+			{
+				if (wParam & (MK_LBUTTON | MK_RBUTTON))
+				{
+					mouse.OnMousMove(pt.x, pt.y);
+				}
+				// button up -> release capture / log event for leaving
+				else
+				{
+					ReleaseCapture();
+					mouse.OnMouseLeave();
+				}
+			}
 			break;
 		}
 		case WM_LBUTTONDOWN:
@@ -194,6 +216,12 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		{
 			const POINTS pt = MAKEPOINTS(lParam);
 			mouse.OnLeftReleased(pt.x, pt.y);
+			// release mouse if outside of window
+			if (pt.x < 0 || pt.x >= width || pt.y < 0 || pt.y >= height)
+			{
+				ReleaseCapture();
+				mouse.OnMouseLeave();
+			}
 			break;
 		}
 		case WM_RBUTTONDOWN:
@@ -206,6 +234,12 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		{
 			const POINTS pt = MAKEPOINTS(lParam);
 			mouse.OnRightReleased(pt.x, pt.y);
+			// release mouse if outside of window
+			if (pt.x < 0 || pt.x >= width || pt.y < 0 || pt.y >= height)
+			{
+				ReleaseCapture();
+				mouse.OnMouseLeave();
+			}
 			break;
 		}
 		case WM_MOUSEWHEEL:

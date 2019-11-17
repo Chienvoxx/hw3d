@@ -17,6 +17,11 @@ int Mouse::GetPosY() const noexcept
 	return y;
 }
 
+bool Mouse::IsInWindow() const noexcept
+{
+	return isInWindow;
+}
+
 bool Mouse::LeftIsPressed() const noexcept
 {
 	return leftIsPressed;
@@ -51,6 +56,20 @@ void Mouse::OnMousMove(int X, int Y) noexcept
 	x = X;
 	y = Y;
 	buffer.push(Mouse::Event(Event::Type::Move, *this));
+}
+
+void Mouse::OnMouseLeave() noexcept
+{
+	isInWindow = false;
+	buffer.push(Mouse::Event(Event::Type::Leave, *this));
+	TrimBuffer();
+}
+
+void Mouse::OnMouseEnter() noexcept
+{
+	isInWindow = true;
+	buffer.push(Mouse::Event(Event::Type::Enter, *this));
+	TrimBuffer();
 }
 
 void Mouse::OnLeftPressed(int x, int y) noexcept
@@ -91,4 +110,3 @@ void Mouse::TrimBuffer() noexcept
 	}
 }
 
-constexpr unsigned int Mouse::bufferSize;
