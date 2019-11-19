@@ -109,7 +109,7 @@ std::optional<int> Window::ProcessMessages()
 		if (msg.message == WM_QUIT)
 		{
 			// check for quit because peek message does not signal this via return val
-			return msg.wParam;
+			return (int)msg.wParam;
 		}
 		// TranslateMessage will post auxiliary WM_CHAR messages from key msgs
 		TranslateMessage(&msg);

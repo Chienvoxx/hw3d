@@ -6,7 +6,7 @@
 
 
 
-std::string WindowsMessageMap::operator()(DWORD msg, LPARAM lp, WPARAM wp)
+std::string WindowsMessageMap::operator()(DWORD msg, LPARAM lp, WPARAM wp) const noexcept
 {
 	constexpr int col1 = 35;
 	constexpr int col2 = 8;
@@ -50,7 +50,7 @@ std::string WindowsMessageMap::operator()(DWORD msg, LPARAM lp, WPARAM wp)
 
 #define ADD_MSG(msg) {msg,#msg}
 
-WindowsMessageMap::WindowsMessageMap()
+WindowsMessageMap::WindowsMessageMap() noexcept
 {
 	map = std::unordered_map<DWORD, std::string>
 	{

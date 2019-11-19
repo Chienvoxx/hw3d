@@ -1,6 +1,8 @@
 #pragma once
 #include <unordered_map>
+// Swapping Windows.h  -> ChiliWin.h causes several of the DWORD constants to be undefined
 #include <Windows.h>
+//#include "ChiliWin.h"
 
 
 /*
@@ -11,8 +13,8 @@
 class WindowsMessageMap
 {
 public:
-	WindowsMessageMap();
-	std::string operator()(DWORD msg, LPARAM lp, WPARAM wp);
+	WindowsMessageMap() noexcept;
+	std::string operator()(DWORD msg, LPARAM lp, WPARAM wp) const noexcept;
 
 private:
 	std::unordered_map<DWORD, std::string> map;
