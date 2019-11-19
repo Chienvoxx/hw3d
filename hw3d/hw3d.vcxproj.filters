@@ -36,6 +36,9 @@
     <ClCompile Include="Chili\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Chili\ChiliTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chili\WindowsMessageMap.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Chili\App.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Chili\ChiliTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
