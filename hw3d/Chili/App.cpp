@@ -10,25 +10,16 @@ App::App()
 
 int App::Go()
 {
-	MSG msg; // the tagMSG struct
-	BOOL gResult; // typedef int BOOL
-	while (gResult = GetMessage(&msg, nullptr, 0, 0) > 0)
+	while (true)
 	{
-		// TranslateMessage will post auxiliary WM_CHAR messages from key msgs
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-
+		// process all messages pending, but do not block for new messages
+		if (const auto exitCode = Window::ProcessMessages())
+		{
+			// if return optional has value it means we're quitting so return exit code
+			return *exitCode;
+		}
 		DoFrame();
 	}
-
-	// check if GetMessage borked
-	if (gResult == -1)
-	{
-		throw CHWND_LAST_EXCEPT();
-	}
-
-	// wParam here is the value passed to PostQuitMessage
-	return msg.wParam;
 }
 
 void App::DoFrame()

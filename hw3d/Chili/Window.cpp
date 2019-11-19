@@ -100,6 +100,26 @@ void Window::SetTitle(const std::string& title)
 	}
 }
 
+std::optional<int> Window::ProcessMessages()
+{
+	MSG msg; // the tagMSG struct
+	// while queue has messages, remove and dispatch them (but do not block on empty queue)
+	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE) > 0)
+	{
+		if (msg.message == WM_QUIT)
+		{
+			// check for quit because peek message does not signal this via return val
+			return msg.wParam;
+		}
+		// TranslateMessage will post auxiliary WM_CHAR messages from key msgs
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	// return empty optional when not quitting app
+	return {};
+}
+
 Window::~Window()
 {
 	DestroyWindow(hWnd);
