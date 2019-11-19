@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Chili\App.cpp" />
     <ClCompile Include="Chili\ChiliException.cpp" />
     <ClCompile Include="Chili\Keyboard.cpp" />
     <ClCompile Include="Chili\Mouse.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Chili\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Chili\App.h" />
     <ClInclude Include="Chili\ChiliException.h" />
     <ClInclude Include="Chili\ChiliWin.h" />
     <ClInclude Include="Chili\Keyboard.h" />

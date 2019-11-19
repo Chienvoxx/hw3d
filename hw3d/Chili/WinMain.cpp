@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "App.h"
 
 
 int WINAPI WinMain(
@@ -9,22 +10,7 @@ int WINAPI WinMain(
 {
 	try
 	{
-		Window wnd(800, 300, "Donkey DX11 Box");
-	
-		MSG msg; // the tagMSG struct
-		BOOL gResult; // typedef int BOOL
-		while (gResult = GetMessage(&msg, nullptr, 0, 0) > 0)
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-
-		if (gResult == -1)
-		{
-			throw CHWND_LAST_EXCEPT();
-		}
-
-			return msg.wParam;
+		return App{}.Go();
 	}
 	catch (const ChiliException e)
 	{
