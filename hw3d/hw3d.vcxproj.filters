@@ -45,6 +45,9 @@
     <ClCompile Include="Chili\dxerr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Chili\DxgiInfoManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chili\WindowsMessageMap.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Chili\dxerr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Chili\DxgiInfoManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

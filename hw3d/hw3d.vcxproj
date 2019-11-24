@@ -152,6 +152,7 @@
     <ClCompile Include="Chili\App.cpp" />
     <ClCompile Include="Chili\ChiliException.cpp" />
     <ClCompile Include="Chili\ChiliTimer.cpp" />
+    <ClCompile Include="Chili\DxgiInfoManager.cpp" />
     <ClCompile Include="Chili\Graphics.cpp" />
     <ClCompile Include="Chili\Keyboard.cpp" />
     <ClCompile Include="Chili\Mouse.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Chili\ChiliException.h" />
     <ClInclude Include="Chili\ChiliTimer.h" />
     <ClInclude Include="Chili\ChiliWin.h" />
+    <ClInclude Include="Chili\DxgiInfoManager.h" />
     <ClInclude Include="Chili\Graphics.h" />
     <ClInclude Include="Chili\Keyboard.h" />
     <ClInclude Include="Chili\Mouse.h" />
