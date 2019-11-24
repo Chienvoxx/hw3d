@@ -158,6 +158,7 @@
     <ClCompile Include="Chili\Window.cpp" />
     <ClCompile Include="Chili\WindowsMessageMap.cpp" />
     <ClCompile Include="Chili\WinMain.cpp" />
+    <ClCompile Include="Chili\dxerr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chili\App.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Chili\Mouse.h" />
     <ClInclude Include="Chili\Window.h" />
     <ClInclude Include="Chili\WindowsMessageMap.h" />
+    <ClInclude Include="Chili\dxerr.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +179,11 @@
   <ItemGroup>
     <Image Include="Chili\chili.ico" />
     <Image Include="chili\icon2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Chili\DXGetErrorDescription.inl" />
+    <None Include="Chili\DXGetErrorString.inl" />
+    <None Include="Chili\DXTrace.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
