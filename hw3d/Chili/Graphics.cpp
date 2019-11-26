@@ -1,10 +1,13 @@
 #include "Graphics.h"
 #include "dxerr.h"
 #include <sstream>
+#include <d3dcompiler.h>
+
 
 namespace wrl = Microsoft::WRL;
 
 #pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dcompiler.lib")
 
 //#define GFX_THROW_FAILED(hrcall) if(FAILED( hr = (hrcall) ) ) throw Graphics::HrException(__LINE__, __FILE__, hr)
 // graphic exception checking/throwing macros (some with dxgi infos)
@@ -91,6 +94,45 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
 {
 	const float color[] = { red, green, blue, 1.0 };
 	pContext->ClearRenderTargetView(pTarget.Get(), color);
+}
+
+void Graphics::DrawTestTriangle()
+{
+	namespace wrl = Microsoft::WRL;
+	HRESULT hr;
+
+	struct Vertex
+	{
+		float x;
+		float y;
+	};
+
+	// create vertex buffer. 1 2d triangle at center of screen
+	const Vertex vertices[] =
+	{
+		{0.0f, 0.5f},
+		{0.5f, -0.5f},
+		{-0.5f, -0.5f},
+	};
+	wrl::ComPtr<ID3D11Buffer> pVertexBuffer;
+	D3D11_BUFFER_DESC bd = {};
+	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.CPUAccessFlags = 0u;
+	bd.MiscFlags = 0u;
+	bd.ByteWidth = sizeof(vertices);
+	bd.StructureByteStride = sizeof(vertices);
+
+	D3D11_SUBRESOURCE_DATA sd = {};
+	sd.pSysMem = vertices;
+	GFX_THROW_INFO(pDevice->CreateBuffer(&bd, &sd, &pVertexBuffer));
+
+	// bind vertex buffer to pipeline
+	const UINT stride = sizeof(Vertex);
+	const UINT offset = 0u;
+	pContext->IASetVertexBuffers(0u, 1u, &pVertexBuffer, &stride, &offset);
+
+	pContext->Draw(3u, 0u);
 }
 
 // Graphics exception stuff
