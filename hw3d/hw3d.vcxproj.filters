@@ -113,5 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Chili\VertexShader.hlsl" />
+    <FxCompile Include="Chili\PixelShader.hlsl" />
   </ItemGroup>
 </Project>
