@@ -11,7 +11,7 @@
 DxgiInfoManager::DxgiInfoManager()
 {
 	// define function signature of DXGIGetDebugInterface
-	typedef HRESULT (WINAPI* DXGIGetDebugInterface)(REFIID, void **);
+	typedef HRESULT(WINAPI* DXGIGetDebugInterface)(REFIID, void **);
 
 	// load the dll that contains the function DXGIGetDebugInterface
 	const auto hModDxgiDebug = LoadLibraryEx("dxgidebug.dll", nullptr, LOAD_LIBRARY_SEARCH_SYSTEM32);
@@ -35,7 +35,7 @@ DxgiInfoManager::DxgiInfoManager()
 
 void DxgiInfoManager::Set() noexcept
 {
-	// set the index (next) so that the next call to GetMessages()
+	// set the index (next) so that the next all to GetMessages()
 	// will only get errors generated after this call
 	next = pDxgiInfoQueue->GetNumStoredMessages(DXGI_DEBUG_ALL);
 }

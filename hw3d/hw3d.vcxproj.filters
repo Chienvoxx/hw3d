@@ -111,4 +111,7 @@
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Chili\VertexShader.hlsl" />
+  </ItemGroup>
 </Project>
