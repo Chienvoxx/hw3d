@@ -168,11 +168,13 @@
     <ClInclude Include="Chili\ChiliWin.h" />
     <ClInclude Include="Chili\DxgiInfoManager.h" />
     <ClInclude Include="Chili\Graphics.h" />
+    <ClInclude Include="Chili\GraphicsThrowMacros.h" />
     <ClInclude Include="Chili\Keyboard.h" />
     <ClInclude Include="Chili\Mouse.h" />
     <ClInclude Include="Chili\Window.h" />
     <ClInclude Include="Chili\WindowsMessageMap.h" />
     <ClInclude Include="Chili\dxerr.h" />
+    <ClInclude Include="Chili\WindowsThrowMacros.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
