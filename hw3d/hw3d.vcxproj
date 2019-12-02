@@ -82,6 +82,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>C:\dev\hw3d\hw3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IS_DEBUG=true;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -99,6 +100,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>C:\dev\hw3d\hw3d;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IS_DEBUG=true;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -114,7 +116,7 @@
       <ConformanceMode>false</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);NDEBUG;IS_DEBUG=false</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -136,7 +138,7 @@
       <ConformanceMode>false</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);NDEBUG;IS_DEBUG=false</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -150,32 +152,54 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Chili\App.cpp" />
+    <ClCompile Include="Chili\Bindable.cpp" />
+    <ClCompile Include="Chili\Box.cpp" />
     <ClCompile Include="Chili\ChiliException.cpp" />
     <ClCompile Include="Chili\ChiliTimer.cpp" />
+    <ClCompile Include="Chili\Drawable.cpp" />
     <ClCompile Include="Chili\DxgiInfoManager.cpp" />
     <ClCompile Include="Chili\Graphics.cpp" />
+    <ClCompile Include="Chili\IndexBuffer.cpp" />
+    <ClCompile Include="Chili\InputLayout.cpp" />
     <ClCompile Include="Chili\Keyboard.cpp" />
     <ClCompile Include="Chili\Mouse.cpp" />
+    <ClCompile Include="Chili\PixelShader.cpp" />
+    <ClCompile Include="Chili\Topology.cpp" />
+    <ClCompile Include="Chili\VertexBuffer.cpp" />
+    <ClCompile Include="Chili\VertexShader.cpp" />
     <ClCompile Include="Chili\Window.cpp" />
     <ClCompile Include="Chili\WindowsMessageMap.cpp" />
     <ClCompile Include="Chili\WinMain.cpp" />
     <ClCompile Include="Chili\dxerr.cpp" />
+    <ClCompile Include="Chili\TransformCbuf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chili\App.h" />
+    <ClInclude Include="Chili\Bindable.h" />
+    <ClInclude Include="Chili\BindableBase.h" />
+    <ClInclude Include="Chili\Box.h" />
     <ClInclude Include="Chili\ChiliException.h" />
     <ClInclude Include="Chili\ChiliTimer.h" />
     <ClInclude Include="Chili\ChiliWin.h" />
+    <ClInclude Include="Chili\ConstantBuffers.h" />
+    <ClInclude Include="Chili\Drawable.h" />
     <ClInclude Include="Chili\DxgiInfoManager.h" />
     <ClInclude Include="Chili\Graphics.h" />
     <ClInclude Include="Chili\GraphicsThrowMacros.h" />
+    <ClInclude Include="Chili\IndexBuffer.h" />
+    <ClInclude Include="Chili\InputLayout.h" />
     <ClInclude Include="Chili\Keyboard.h" />
     <ClInclude Include="Chili\Mouse.h" />
+    <ClInclude Include="Chili\PixelShader.h" />
+    <ClInclude Include="Chili\Topology.h" />
+    <ClInclude Include="Chili\VertexBuffer.h" />
+    <ClInclude Include="Chili\VertexShader.h" />
     <ClInclude Include="Chili\Window.h" />
     <ClInclude Include="Chili\WindowsMessageMap.h" />
     <ClInclude Include="Chili\dxerr.h" />
     <ClInclude Include="Chili\WindowsThrowMacros.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Chili\TransformCbuf.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc" />
