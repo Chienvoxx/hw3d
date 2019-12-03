@@ -183,6 +183,7 @@
     <ClInclude Include="Chili\ChiliWin.h" />
     <ClInclude Include="Chili\ConstantBuffers.h" />
     <ClInclude Include="Chili\Drawable.h" />
+    <ClInclude Include="Chili\DrawableBase.h" />
     <ClInclude Include="Chili\DxgiInfoManager.h" />
     <ClInclude Include="Chili\Graphics.h" />
     <ClInclude Include="Chili\GraphicsThrowMacros.h" />
